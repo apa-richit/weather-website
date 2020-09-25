@@ -25,6 +25,7 @@ hbs.registerPartials(partialsPath)
 
 app.use(express.static(publicDirectoryPath))
 
+const port = process.env.PORT || 3000
 
 //these are routes
 
@@ -106,6 +107,6 @@ app.get('*', (req, res) => {
 //app.com/help
 //app.com/about
 
-app.listen(3000, () => {
-    console.log(chalk.blue.inverse('server is up and running on port 3000'))
+app.listen(port), () => {
+    console.log(chalk.blue.inverse('server is up and running on port ' + port))
 })

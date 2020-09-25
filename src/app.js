@@ -1,7 +1,7 @@
 const path = require('path')
 const hbs = require('hbs')
 const express = require('express')
-const chalk = require('chalk')
+//const chalk = require('chalk')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
@@ -108,5 +108,5 @@ app.get('*', (req, res) => {
 //app.com/about
 
 app.listen((port), () => {
-    console.log(chalk.blue.inverse('server is up and running on port ' + port))
+    console.log('server is up and running on port ' + port)
 })

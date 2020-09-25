@@ -33,14 +33,14 @@ const port = process.env.PORT || 3000
 app.get('', (req, res) => {
     res.render('index', {
         title: 'weather',
-        name: 'Andrew'
+        name: 'Ritesh'
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About',
-        name: 'Andrew'
+        name: 'Ritesh'
     })
 })
 
@@ -90,7 +90,7 @@ app.get('/products', (req, res) => {
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'Ritesh',
         errorMessage: 'Help article not found'
     })
 })
@@ -98,7 +98,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'Ritesh',
         errorMessage: 'Page not found.'
     })
 })

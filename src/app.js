@@ -107,6 +107,6 @@ app.get('*', (req, res) => {
 //app.com/help
 //app.com/about
 
-app.listen(port), () => {
+app.listen((port), () => {
     console.log(chalk.blue.inverse('server is up and running on port ' + port))
 })

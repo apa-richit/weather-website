@@ -20,7 +20,9 @@ fetch('http://localhost:3000/weather?address=Boston').then((response) => {
     })
 })*/
 
-const weatherForm = document.querySelector('form')
+const $weatherByLocationSearch = document.querySelector('#search-location')
+
+const $weatherByGPSLocation = document.querySelector('#current-location')
 
 const search = document.querySelector('input')
 
@@ -29,7 +31,7 @@ const messageOne = document.querySelector('#message-1')
 
 const messageTwo = document.querySelector('#message-2')
 
-weatherForm.addEventListener('submit', (e) => {
+$weatherByLocationSearch.addEventListener('click', (e) => {
     e.preventDefault()
     const location = search.value
 
@@ -48,4 +50,37 @@ weatherForm.addEventListener('submit', (e) => {
         })
     })
     //console.log(location)
+})
+
+$weatherByGPSLocation.addEventListener('click', () => {
+
+    //disable
+
+    $weatherByGPSLocation.setAttribute('disabled', 'disabled')
+    
+    messageOne.textContent = 'Loading....'
+    messageTwo.textContent = ''
+
+    if (!navigator.geolocation) {
+        return alert('Geolocation is not supported by this browser!')
+    }
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        //console.log(position.coords.latitude)
+        latitude = position.coords.latitude
+        longitude = position.coords.longitude
+
+        fetch('/weatherByGPS?lat=' + encodeURIComponent(latitude) + '&long=' + encodeURIComponent(longitude)).then((response) => {
+            data = response.json().then((data) => {
+                $weatherByGPSLocation.removeAttribute('disabled')
+                if (data.error) {
+                    messageOne.textContent = data.error
+                } else {
+                    messageOne.textContent = data.location
+                    messageTwo.textContent = data.forecast
+                }
+                //console.log(data)
+            })
+        })
+    })
 })

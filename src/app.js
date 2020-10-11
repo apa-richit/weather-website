@@ -75,6 +75,24 @@ app.get('/weather', (req, res) => {
     })
 })
 
+app.get('/weatherByGPS', (req, res) => {
+    if(!req.query.lat || !req.query.long){
+        return res.send({
+            error: 'You must provide a valid lattitude and longitude!'
+        })
+    }
+    forecast(req.query.lat, req.query.long, (error, {weather_description, current_temperature, rain_chance, humidity, locationName, locationCountry, locationRegion}) =>{
+        if(error){
+            return res.send({error})
+        }
+        res.send({
+            location: locationName + ',' + locationRegion + ',' + locationCountry,
+            forecast: weather_description + '. It is currently ' + current_temperature + ' degrees out. There is ' + rain_chance + '% chance of rain. There is ' + humidity + '% humidity.',
+            address: locationName + ',' + locationRegion + ',' + locationCountry
+        })
+    })
+})
+
 app.get('/products', (req, res) => {
     if (!req.query.search){
         return res.send({
